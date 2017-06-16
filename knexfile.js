@@ -1,19 +1,6 @@
 var env = require('./backend/env');
-var connection;
-if(process.env.RDS_HOSTNAME) {
-  // Don't worry about this for now, only relevant if you want to deploy
-    connection = { host     : process.env.RDS_HOSTNAME,
-                   database : 'ebdb',
-                   user     : process.env.RDS_USERNAME,
-                   password : process.env.RDS_PASSWORD,
-                   port     : process.env.RDS_PORT };
-} else if (process.env.PG_CONNECTION_STRING) {
-    connection = process.env.PG_CONNECTION_STRING;
-} else if (env == 'test') {
-    connection = { database : 'react_test' };
-} else {
-    connection = { database : 'react_intro' };
-}
+var connection = { database : 'google_drive_music_player' };
+
 
 module.exports = {
     client: 'pg',
