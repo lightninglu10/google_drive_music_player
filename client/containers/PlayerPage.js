@@ -30,7 +30,7 @@ class PlayerPage extends React.Component {
     }
 
     componentDidMount() {
-
+        this.props.playlistActions.getSongs();
     }
 
     render() {
