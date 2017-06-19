@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { applyRouterMiddleware, Router, Route, IndexRoute, Redirect} from 'react-router';
 
 // Containers
-import AuthPage from '../containers/AuthPage.js'
+import PlayerPage from '../containers/PlayerPage.js'
 
 class Routes extends React.Component {
 
@@ -25,7 +25,7 @@ class Routes extends React.Component {
     render() {
         return (
             <Router history={this.props.history} routes={this._routes} onUpdate={() => window.scrollTo(0, 0)}>
-                <Route path="/auth" component={AuthPage} />
+                <Route path="/player" component={PlayerPage} />
                 
             </Router>
         );

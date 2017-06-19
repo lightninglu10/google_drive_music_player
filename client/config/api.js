@@ -11,10 +11,7 @@ const BASE_URL = process.env.NODE_ENV === 'production' ? ('https://' + PRODUCTIO
 module.exports = {
     PRODUCTION_SITE: PRODUCTION_SITE,
     // URLs
-    LOGIN: BASE_URL + 'login/',
-    SIGNUP: BASE_URL + 'signup/',
-    LOGOUT: BASE_URL + 'logout/',
-    FACEBOOK: BASE_URL + 'login/facebook/token/',
+    PLAYLIST: BASE_URL + 'playlist/',
     GET_CONFIG: {
         method: 'GET',
         credentials: 'include',

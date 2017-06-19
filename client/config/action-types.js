@@ -4,9 +4,9 @@
 */
 
 module.exports = {
-    // User
-    LOGIN_SUCCESSFUL: 'Successfully logged in',
-    LOGOUT_SUCCESSFUL: 'Successfully logged out',
-    FACEBOOK_LOGIN_REQUEST: 'Login requested',
-    FACEBOOK_LOGIN_SUCCESSFUL: 'Facebook login successful',
+    // Song
+    SONG_SELECT_SUCCESSFUL: 'Successfully chose song',
+    
+    // Playlist
+    SONG_UPLOAD_SUCCESSFUL: 'Successfully uploaded songs',
 }

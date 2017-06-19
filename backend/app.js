@@ -2,65 +2,36 @@ var express = require('express');
 var router = express.Router();
 var secureCookies = false; // we only secure them for production so we can test without https
 var env      = require('./env');
+var Promise = require('bluebird');
 
-var passport = require('./passportConfig');
-var User     = require('./user');
+var playlist = require('./playlist');
 
-router.post('/signup', function(req, res) {
-    // Signup for service
-    console.log(req.body);
-    User.create(req.body).then(user => {
-        res.status(200).json(user.serializeForSelf());
-    }).catch(err => {
-        res.status(400).json({error: err.message});
+var options = { 
+    // Initialization Options
+    promiseLib: Promise
+};
+
+var pgp = require('pg-promise')(options);
+var connectionString = 'postgres://localhost:5432/google_drive_music_player';
+var db = pgp(connectionString);
+
+router.get('/playlist', function(req, res, next) {
+    // Get the playlist
+    //console.log(req.playlist.serializeForSelf());
+    //return res.status(200).json(req.playlist.serializeForSelf());
+    
+    db.any('select * from audio_files')
+    .then(function (data) {
+        res.status(200)
+        .json({
+            status: 'success',
+            data: data,
+            message: 'Retrived all songs'
+        });
+    })
+    .catch(function (err) {
+        return next(err);
     });
-});
-
-router.get('/login', function(req, res, next) {
-    // Get the login status of the user
-    if(!req.user) {
-        return res.status(401).json({error: 'authentication required'});
-    }
-
-    console.log(req.user.serializeForSelf());
-    return res.status(200).json(req.user.serializeForSelf());
-});
-
-router.post('/login', function(req, res, next) {
-    // Post the information for the login 
-    passport.authenticate('local', function(err, user, info) {
-        if (err) { return res.status(400).json({error: 'oops: ' + err}); }
-        if (!user) { return res.status(400).json({error: info.message}); }
-        req.logIn(user, function(err) {
-            if (err) { return next(err); }
-            console.log(user.serializeForSelf());
-            return res.status(200).json(Object.assign({message: 'successful login'}, user.serializeForSelf()));
-        });
-    })(req, res, next)
-});
-
-router.post('/logout', function(req, res, next) {
-    // Logout of app
-    req.logout();
-    res.status(200).json({message: 'successful logout'});
-});
-
-router.post('/login/facebook/token', function(req, res, next) {
-    // Facebook login
-    passport.authenticate('facebook-token', function(err, user, info) {
-        if (err) { return res.status(400).json({error: 'oops: ' + err}); }
-        if (!user) { return res.status(400).json({error: 'Facebook login failed'}); }
-        req.logIn(user, function(err) {
-            if (err) { return next(err); }
-            console.log(user.serializeForSelf());
-            return res.status(200).json(Object.assign({message: 'successful login'}, user.serializeForSelf()));
-        });
-    })(req, res, next)
-});
-
-router.use(function renderUnexpectedError (err, req, res, next) {
-    res.status(500).json({error: 'Unexpected Error'});
-    next(err);
 });
 
 module.exports = router;

@@ -9,7 +9,7 @@ const passport = require('./backend/passportConfig');
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(session({secret: 'react_intro',
+app.use(session({secret: 'google_drive_music_player',
                  resave: false,
                  saveUninitialized: false}));
 app.use(passport.initialize());
