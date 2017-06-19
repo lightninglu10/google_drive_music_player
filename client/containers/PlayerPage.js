@@ -6,7 +6,6 @@
 
 import React from 'react';
 
-<<<<<<< HEAD
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -18,8 +17,7 @@ import AudioPlayer from '../components/AudioPlayer';
 
 // Song Actions
 import PlaylistActions from '../actions/PlaylistActions';
-=======
->>>>>>> 2df6bdc9affa4e4be69a92940848f97ddc274674
+
 
 class PlayerPage extends React.Component {
 
@@ -27,10 +25,7 @@ class PlayerPage extends React.Component {
         super(props);
 
         this.state = {
-<<<<<<< HEAD
-=======
 
->>>>>>> 2df6bdc9affa4e4be69a92940848f97ddc274674
         }
     }
 
@@ -39,7 +34,7 @@ class PlayerPage extends React.Component {
     }
 
     render() {
-<<<<<<< HEAD
+
         var { playlist, playlistActions } = this.props;
 
         return (
@@ -50,17 +45,11 @@ class PlayerPage extends React.Component {
 
                 Currently Playing: {playlist.current_song.file_address}
             </div>        
-=======
-        return (
-            
-            <div>Hello World!</div>
->>>>>>> 2df6bdc9affa4e4be69a92940848f97ddc274674
 
         );
     }
 }
 
-<<<<<<< HEAD
 // REDUX
 
 function mapStateToProps(state) {
@@ -77,6 +66,3 @@ function mapDispatchToProps(dispatch) {
 } 
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerPage);
-=======
-export default PlayerPage;
->>>>>>> 2df6bdc9affa4e4be69a92940848f97ddc274674
