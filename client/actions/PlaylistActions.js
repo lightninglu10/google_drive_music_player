@@ -30,8 +30,7 @@ module.exports = {
             .then(Helpers.checkState)
             .then(Helpers.parseJSON)
             .then((json) => {
-                console.log(json.data);
-                return dispatch(uploadSuccessful(json.data));
+                return dispatch(uploadSuccessful(json));
             })
             .catch((error) => {
                 console.log('songs were not uploaded');
@@ -45,5 +44,6 @@ module.exports = {
             return dispatch(songSelectSuccessful(song));
         }
     }
+
 }         
 

@@ -14,6 +14,8 @@ import { bindActionCreators } from 'redux';
 import Playlist from '../components/Playlist'; 
 // Audio Player
 import AudioPlayer from '../components/AudioPlayer';
+// Google Login Form
+import GoogleLoginForm from '../components/GoogleLoginForm';
 
 // Song Actions
 import PlaylistActions from '../actions/PlaylistActions';
@@ -30,7 +32,7 @@ class PlayerPage extends React.Component {
     }
 
     componentDidMount() {
-        this.props.playlistActions.getSongs();
+        
     }
 
     render() {
@@ -39,6 +41,8 @@ class PlayerPage extends React.Component {
 
         return (
             <div>
+                <GoogleLoginForm />
+
                 <AudioPlayer />
                 
                 <Playlist playlistActions={playlistActions} playlist={playlist} />

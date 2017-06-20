@@ -6,7 +6,13 @@ var _ = require('lodash');
 module.exports = bookshelf.Model.extend({
     tableName: 'audio_files',
 
-    serializeForSelf: function() {
-        return _.pick(this.attributes, ['name','file_address']);
-    }
+}, {
+	getAllSongs: function() {
+		
+		return new this().fetchAll().then(songData => {
+			return songData.serialize();
+    	}).catch(err => {
+			return err;
+		});
+	}
 });

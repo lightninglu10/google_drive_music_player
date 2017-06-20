@@ -24,9 +24,8 @@ class AudioPlayer extends React.Component {
 
         return (
          
-                <audio src="./one.mp3" type="audio/mpeg" controls autoPlay /> 
+                <audio src="http://www.nihilus.net/soundtracks/Static%20Memories.mp3" type="audio/mpeg" controls /> 
                     
-            
         );
     }
 }
