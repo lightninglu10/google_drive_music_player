@@ -4,11 +4,16 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const app = express();
+const passport = require('./backend/passportConfig');
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-
+app.use(session({secret: 'google_drive_music_player',
+                 resave: false,
+                 saveUninitialized: false}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/health', function(req, res, next) {
     res.status(200).json({success: 'pong!'});

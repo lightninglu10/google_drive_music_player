@@ -21,7 +21,14 @@ class GoogleLoginForm extends React.Component {
 	}
 
 	responseGoogle = (response) => {
-		console.log(response);
+		this.props.loginFunction.googleLogin(response)
+		.then((data) => {
+			if(data.isLoggedIn) {
+				console.log('data is logged in!!!!');
+			} else {
+				console.log('data is not logging !!!!');
+			}
+		});
 	}
 
 	render() {

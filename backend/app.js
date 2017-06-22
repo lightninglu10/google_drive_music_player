@@ -5,16 +5,9 @@ var env      = require('./env');
 var Promise = require('bluebird');
 var _ = require('lodash');
 
+var passport = require('./passportConfig');
+
 var Playlist = require('./playlist');
-
-var options = { 
-    // Initialization Options
-    promiseLib: Promise
-};
-
-/*var pgp = require('pg-promise')(options);
-var connectionString = 'postgres://localhost:5432/google_drive_music_player';
-var db = pgp(connectionString);*/
 
 router.get('/playlist', function(req, res, next) {
 
@@ -22,6 +15,23 @@ router.get('/playlist', function(req, res, next) {
         return res.status(200).json(songsArray);
     });
 
+});
+
+router.post('/login/google/token', function(req, res, next) {
+	passport.authenticate('google-token', function(err, user, info) {
+	    if (err) { return res.status(400).json({error: 'oops: ' + err}); }
+	    if (!user) { return res.status(400).json({error: 'Google login failed'}); }
+	    req.logIn(user, function(err) {
+	    	if (err) { return next(err); }
+	      	console.log(user.serializeForSelf());
+            return res.status(200).json(Object.assign({message: 'successful login'}, user.serializeForSelf()));
+	    });
+	})(req, res, next)
+ });
+
+router.use(function renderUnexpectedError (err, req, res, next) {
+    res.status(500).json({error: 'Unexpected Error'});
+    next(err);
 });
 
 module.exports = router;

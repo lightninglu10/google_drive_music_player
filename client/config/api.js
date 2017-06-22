@@ -12,6 +12,7 @@ module.exports = {
     PRODUCTION_SITE: PRODUCTION_SITE,
     // URLs
     PLAYLIST: BASE_URL + 'playlist/',
+    GOOGLE: BASE_URL + 'login/google/token/',
     GET_CONFIG: {
         method: 'GET',
         credentials: 'include',

@@ -17,8 +17,10 @@ import AudioPlayer from '../components/AudioPlayer';
 // Google Login Form
 import GoogleLoginForm from '../components/GoogleLoginForm';
 
-// Song Actions
+// Playlist Actions
 import PlaylistActions from '../actions/PlaylistActions';
+// Login Actions
+import LoginActions from '../actions/LoginActions';
 
 
 class PlayerPage extends React.Component {
@@ -37,11 +39,11 @@ class PlayerPage extends React.Component {
 
     render() {
 
-        var { playlist, playlistActions } = this.props;
+        var { playlist, playlistActions, loginActions } = this.props;
 
         return (
             <div>
-                <GoogleLoginForm />
+                <GoogleLoginForm loginFunction={loginActions} />
 
                 <AudioPlayer />
                 
@@ -66,6 +68,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         playlistActions: bindActionCreators(PlaylistActions, dispatch),
+        loginActions: bindActionCreators(LoginActions, dispatch),
     }
 } 
 
