@@ -5,7 +5,7 @@
 
 import types from '../config/action-types';
 
-const intialState = {
+const initialState = {
 	isLoggedIn: false,
 	isGoogleFetching: false,
 	username: '',

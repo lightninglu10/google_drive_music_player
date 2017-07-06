@@ -16,6 +16,8 @@ import Playlist from '../components/Playlist';
 import AudioPlayer from '../components/AudioPlayer';
 // Google Login Form
 import GoogleLoginForm from '../components/GoogleLoginForm';
+// Google Drive Componenet
+import GoogleDriveComp from '../components/GoogleDriveComp';
 
 // Playlist Actions
 import PlaylistActions from '../actions/PlaylistActions';
@@ -39,17 +41,27 @@ class PlayerPage extends React.Component {
 
     render() {
 
-        var { playlist, playlistActions, loginActions } = this.props;
+        var { playlist, playlistActions, loginActions, user } = this.props;
 
         return (
             <div>
-                <GoogleLoginForm loginFunction={loginActions} />
 
-                <AudioPlayer />
+                <AudioPlayer playlist={playlist} />
+
+                <GoogleDriveComp user={user} selectSong={playlistActions.selectSong} playlist={playlist} />
                 
-                <Playlist playlistActions={playlistActions} playlist={playlist} />
+                {/*<Playlist playlistActions={playlistActions} playlist={playlist} />*/}
 
-                Currently Playing: {playlist.current_song.file_address}
+                Currently Playing: {playlist.current_song} <br /><br />
+
+                google user:
+                <div>
+                { user.isLoggedIn 
+                    ? user.first_name
+                    : 'User is not logged in'
+                }
+                </div>
+
             </div>        
 
         );
@@ -60,8 +72,8 @@ class PlayerPage extends React.Component {
 
 function mapStateToProps(state) {
     return { 
-        song: state.song,
         playlist: state.playlist,
+        user: state.user,
     }
 }
 

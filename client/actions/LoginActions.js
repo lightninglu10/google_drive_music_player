@@ -8,7 +8,6 @@ import types from '../config/action-types';
 import API from '../config/api';
 import Helpers from './helpers';
 
-
 function requestGoogleLogin() {
     return {
         type: types.GOOGLE_LOGIN_REQUEST,
@@ -23,7 +22,7 @@ function receiveGoogleLogin(json) {
         isGoogleFetching: false,
         isLoggedIn: true,
         first_name: json.first_name,
-        email: json.email
+        email: json.email,
     }
 }
 
@@ -38,7 +37,7 @@ function loginError(message) {
 
 module.exports = {
     googleLogin: function googleLogin(response) {
-        var data = {'access_token': response.accessToken}
+        var data = {'access_token': response.access_token}
         return dispatch => {
             dispatch(requestGoogleLogin());
             return fetch(API.GOOGLE, API.POST_CONFIG(data))

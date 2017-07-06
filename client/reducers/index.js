@@ -5,6 +5,6 @@ module.exports = combineReducers({
     // routerReducer REQUIRED
     routing: routerReducer,
     // 
-    song: require('./SongReducer'),
+    user: require('./UserReducer'),
     playlist: require('./PlaylistReducer'),
 });

@@ -18,7 +18,8 @@ function uploadSuccessful(songs) {
 function songSelectSuccessful(song) {
     return { 
         type: types.SONG_SELECT_SUCCESSFUL,
-        current_song: song,
+        current_song: song.name,
+        current_song_url: song.url,
     }
 }
 

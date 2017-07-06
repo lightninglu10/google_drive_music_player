@@ -7,7 +7,8 @@ import types from '../config/action-types';
 
 const initialState = {
     songs: [],
-    current_song: {},
+    current_song: '',
+    current_song_url: '',
 }
 
 module.exports = function playlistReducer(state = initialState, action) {

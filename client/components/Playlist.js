@@ -31,7 +31,7 @@ class Playlist extends React.Component {
 
         return (
             <ul>
-                Playlist:
+                Local Playlist:
                 {
                     playlist.songs.map((song) => {
                         return <li key={song.id} value={song} onClick={() => this.handleSongClick(song)}>{song.name}</li>
