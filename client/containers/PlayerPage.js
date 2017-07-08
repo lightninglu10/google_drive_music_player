@@ -29,22 +29,29 @@ class PlayerPage extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-
-        }
+        console.log()
     }
 
-    componentDidMount() {
-        
+    // Handle log out button
+    handleLogOutClick = (event) => {
+        window.gapi.auth2.getAuthInstance().signOut().then(() => {
+            console.log('logged out!');
+        });
     }
 
     render() {
-
         var { playlist, playlistActions, loginActions, user } = this.props;
 
         return (
             <div>
+                google user:
+                <div>
+                { user.isLoggedIn 
+                    ? user.first_name
+                    : 'User is not logged in'
+                }
+                </div>
+                <button onClick={this.handleLogOutClick}>Log Out</button> <br /><br />
 
                 <AudioPlayer playlist={playlist} />
 
@@ -53,17 +60,7 @@ class PlayerPage extends React.Component {
                 {/*<Playlist playlistActions={playlistActions} playlist={playlist} />*/}
 
                 Currently Playing: {playlist.current_song} <br /><br />
-
-                google user:
-                <div>
-                { user.isLoggedIn 
-                    ? user.first_name
-                    : 'User is not logged in'
-                }
-                </div>
-
             </div>        
-
         );
     }
 }

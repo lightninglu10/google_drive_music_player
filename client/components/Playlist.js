@@ -1,7 +1,7 @@
 /**
  * Playlist
  * Lists all the songs to select from
- * author: Kevin Ha
+ * Author: Kevin Ha
  */
 
 import React from 'react';
@@ -10,18 +10,14 @@ class Playlist extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-
-        }
     }
 
-    //load current songs in playlist
+    // Load current songs in playlist
     componentDidMount() {
         this.props.playlistActions.getSongs();
     }
 
-    // change the song playing
+    // Change the song playing
     handleSongClick = (song) => {
         this.props.playlistActions.selectSong(song);
     }

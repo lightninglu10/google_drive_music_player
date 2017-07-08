@@ -18,6 +18,7 @@ router.get('/playlist', function(req, res, next) {
 });
 
 router.post('/login/google/token', function(req, res, next) {
+	console.log('SHALALALALALALA');
 	passport.authenticate('google-token', function(err, user, info) {
 	    if (err) { return res.status(400).json({error: 'oops: ' + err}); }
 	    if (!user) { return res.status(400).json({error: 'Google login failed'}); }

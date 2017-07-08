@@ -1,82 +1,85 @@
 /**
  * Google Login Form
  * Authentication form for google to access google drive
- * author: Kevin Ha
+ * Author: Kevin Ha
  */
 
 import React from 'react';
 import { browserHistory } from 'react-router';
 
+import Script from 'react-load-script';
 
-
-// Google login npm package
-import GoogleLogin from 'react-google-login';
+// Import google app information
+var GoogleConfig = require('../../backend/google');
 
 class GoogleLoginForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-
-		this.state = {
-
-
-		}
 	}
-
-	responseGoogle = (response) => {
-		console.log(response);
-		this.props.loginFunction.googleLogin(response)
-		.then((data) => {
-			if(data.isLoggedIn) {
-				browserHistory.push('/Player');
-			} else {
-				console.log('data is not logging !!!!');
-			}
-		});
-	}
-
-	start = (event) => {
-        gapi.load('client:auth2', this.initClient);
-    }
 
     componentDidMount = () => {
-        this.start();
+        //this.start();
     }
 
+    // Load Google api Javascript libraries 
+    start = () => {
+        window.gapi.load('client:auth2', this.initClient);
+    }
 
+    // Once login button is clicked, log in google user and connect to google api
     handleLoginClick = () => {
         gapi.auth2.getAuthInstance().signIn();
     }
 
+    // Callback function for gapi load
     initClient = () => {
-        console.log(window.gapi);
+        // Initialize Javascript client
         window.gapi.client.init({
-            apiKey: 'AIzaSyDGB0jHjLLp-mWXrXEX9AaaviklFDbQyRk',
-            clientId: '530735327961-7d2g6lfuij1q60f9ig0a73k6cah56mld.apps.googleusercontent.com',
-            scope: 'https://www.googleapis.com/auth/drive.metadata.readonly',
-            discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest']
+            apiKey: GoogleConfig.apiKey,
+            clientId: GoogleConfig.clientId,
+            scope: GoogleConfig.scope,
+            discoveryDocs: GoogleConfig.discoveryDocs
         }).then(() => {
-        	console.log('inside init');
-            // Listen for sign-in state changes.
+            // Listen for changes in current user's sign-in state
             gapi.auth2.getAuthInstance().isSignedIn.listen(this.updateSigninStatus);
+            // Set current user for newly-initalized GoogleAuth instance, and also listen for changes in the current user
             gapi.auth2.getAuthInstance().currentUser.listen(this.updateUserStatus);
-
-            console.log('inside init2');
         })
     }
 
+    /*// Handle new google user 
+    responseGoogle = (response) => {
+        console.log(response);
+
+        // Submit user into local database
+        this.props.loginFunction.googleLogin(response)
+        .then((data) => {
+            if(data.isLoggedIn) {
+                // Push to main playlist page
+                browserHistory.push('/Player');
+            } else {
+                console.log('data is not logging !!!!');
+            }
+        });
+    }*/
+    
     updateSigninStatus = (isSignedIn) => {
         if (isSignedIn) {
             console.log('update status signed in');
         } else {
             console.log('update status not signed in');
+            browserHistory.push('/Login');
         } 
     }
 
     updateUserStatus = (isSignedIn) => {
     	if (isSignedIn) {
-            console.log('updateUserStatus true');
-            this.responseGoogle(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true));
+            console.log('updateUserStatus true ' + this.props.loggingOut);
+
+            browserHistory.push('/Player');
+            //this.responseGoogle(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true));
+            
         } else {
             console.log('updateUserStatus false');
         } 
@@ -85,19 +88,15 @@ class GoogleLoginForm extends React.Component {
 	render() {
 		return(
 			<div>
-			{/*<GoogleLogin
-				clientId="530735327961-7d2g6lfuij1q60f9ig0a73k6cah56mld.apps.googleusercontent.com"
-				onSuccess={this.responseGoogle}
-				onFailure={this.responseGoogle}
-				scope="https://www.googleapis.com/auth/drive.readonly"
-				discoveryDocs={["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"]}
-			/>*/}
+
+                <Script
+                    url='https://apis.google.com/js/api.js'
+                    onLoad={this.start}
+                    onError={this.start}
+                ></Script>
 
 				<button onClick={this.handleLoginClick}>login</button>
-
 			</div>
-
-			
 		);
 	}
 }

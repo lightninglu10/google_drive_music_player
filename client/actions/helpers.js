@@ -24,7 +24,6 @@ module.exports = {
             return Promise.resolve(response);
         }
         console.log('check status error: ' + response.statusText);
-        //response.jason().then((response) => {});
         const error = new Error(response.statusText);
         error.response = response;
         return Promise.reject(error);

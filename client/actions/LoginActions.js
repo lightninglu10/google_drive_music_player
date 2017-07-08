@@ -36,8 +36,10 @@ function loginError(message) {
 }
 
 module.exports = {
-    googleLogin: function googleLogin(response) {
-        var data = {'access_token': response.access_token}
+    googleLogin: function googleLogin() {
+        var authInst = gapi.auth2.getAuthInstance();
+        authInst.signIn();
+
         return dispatch => {
             dispatch(requestGoogleLogin());
             return fetch(API.GOOGLE, API.POST_CONFIG(data))
@@ -47,10 +49,10 @@ module.exports = {
                 return dispatch(receiveGoogleLogin(json));
             })
             .catch(error => {
-                // catch google signup error
+                // Catch google signup error
                 return dispatch(loginError('Google login error ' + error));
             })    
         }
-    }        
+    }
 }
     

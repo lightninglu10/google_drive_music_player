@@ -1,11 +1,12 @@
 var passport = require('passport');
 var GoogleTokenStrategy = require('passport-google-token').Strategy;
 var GoogleUser = require('./googleUser');
+var GoogleConfig = require('./google');
 
 passport.use(new GoogleTokenStrategy({
-		clientID: '530735327961-7d2g6lfuij1q60f9ig0a73k6cah56mld.apps.googleusercontent.com',
-    	clientSecret: 'ZpAzCWErYODr2k2DfkIey3LV',
-    	callbackURL: 'http://localhost:3000/login/google/callback'
+		clientID: GoogleConfig.clientId,
+    	clientSecret: GoogleConfig.clientSecret,
+    	callbackURL: GoogleConfig.callbackURL
   	},
   	function(accessToken, refreshToken, profile, done) {
   		// asynchronous

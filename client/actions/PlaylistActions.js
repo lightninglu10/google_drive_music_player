@@ -24,7 +24,7 @@ function songSelectSuccessful(song) {
 }
 
 module.exports = {
-    // Pullings songs from database
+    // Pulling songs from database
     getSongs: function getSongs() {
         return dispatch => {
             return fetch(API.PLAYLIST, API.GET_CONFIG)
@@ -39,7 +39,7 @@ module.exports = {
         }
     },
 
-    //selecting song from playlist, later use REST Api 
+    // Selecting song from playlist
     selectSong: function selectSong(song) {
         return dispatch => {
             return dispatch(songSelectSuccessful(song));

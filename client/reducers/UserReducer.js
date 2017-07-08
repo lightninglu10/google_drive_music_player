@@ -1,7 +1,7 @@
 /**
-* User Reducer
-* Author: Kevin Ha
-*/
+ * User Reducer
+ * Author: Kevin Ha
+ */
 
 import types from '../config/action-types';
 
