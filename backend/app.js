@@ -17,6 +17,21 @@ router.get('/playlist', function(req, res, next) {
 
 });
 
+router.post('/login', function(req, res, next) {
+	console.log('inside post');
+    // Post the information for the login 
+    passport.authenticate('custom', function(err, user, info) {
+    	console.log('inside authentication');
+        if (err) { return res.status(400).json({error: 'oops: ' + err}); }
+        if (!user) { return res.status(400).json({error: info.message}); }
+        req.logIn(user, function(err) {
+            if (err) { return next(err); }
+            console.log(user.serializeForSelf());
+            return res.status(200).json(Object.assign({message: 'successful login'}, user.serializeForSelf()));
+        });
+    })(req, res, next)
+});
+
 router.post('/login/google/token', function(req, res, next) {
 	console.log('SHALALALALALALA');
 	passport.authenticate('google-token', function(err, user, info) {

@@ -31,7 +31,7 @@ class GoogleDriveComp extends React.Component {
 
     // List files 10 at a time
 	listFiles = () => {
-		gapi.client.drive.files.list({
+		drive.files.list({
 			pageSize: 10,
 			fields: "nextPageToken, files(id, name, webContentLink)",
 			q: "mimeType='audio/mpeg'",

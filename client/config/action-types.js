@@ -13,5 +13,8 @@ module.exports = {
     // Google login
     GOOGLE_LOGIN_REQUEST: "Google login requested",
     GOOGLE_LOGIN_SUCCESSFUL: "Google login successful",
-    LOGIN_FAILURE: "Login was not successful"
+    LOGIN_FAILURE: "Login was not successful",
+
+    // Register User
+    LOGIN_USER_SUCCESSFUL: "Login successful"
 }

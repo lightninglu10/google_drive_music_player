@@ -48,12 +48,17 @@ class GoogleLoginForm extends React.Component {
         })
     }
 
-    /*// Handle new google user 
+    // Handle new google user 
     responseGoogle = (response) => {
         console.log(response);
 
         // Submit user into local database
-        this.props.loginFunction.googleLogin(response)
+        this.props.loginFunction.googleLogin({
+            google_id: response.getId(),
+            first_name: response.getGivenName(),
+            last_name: response.getFamilyName(),
+            email: response.getEmail()
+        })
         .then((data) => {
             if(data.isLoggedIn) {
                 // Push to main playlist page
@@ -62,7 +67,7 @@ class GoogleLoginForm extends React.Component {
                 console.log('data is not logging !!!!');
             }
         });
-    }*/
+    }
     
     updateSigninStatus = (isSignedIn) => {
         if (isSignedIn) {
@@ -78,7 +83,7 @@ class GoogleLoginForm extends React.Component {
             console.log('updateUserStatus true ' + this.props.loggingOut);
 
             browserHistory.push('/Player');
-            //this.responseGoogle(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true));
+            // this.responseGoogle(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile());
             
         } else {
             console.log('updateUserStatus false');

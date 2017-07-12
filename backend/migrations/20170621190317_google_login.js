@@ -7,6 +7,8 @@ exports.up = function(knex, Promise) {
         table.string('google_id');
         table.string('access_token');
         table.string('email');
+        table.timestamps();
+        table.timestamp('last_seen_at');
     });
 };
 

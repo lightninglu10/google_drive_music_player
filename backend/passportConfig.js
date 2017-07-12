@@ -1,7 +1,40 @@
 var passport = require('passport');
 var GoogleTokenStrategy = require('passport-google-token').Strategy;
+var CustomStrategy = require('passport-custom').Strategy;
 var GoogleUser = require('./googleUser');
 var GoogleConfig = require('./google');
+
+passport.use(new CustomStrategy({
+		google_id: 'google_id',
+		first_name: 'first_name',
+		last_name: 'last_name',
+		email: 'email'
+	},
+	function(google_id, done) {
+		// Check for the user in local database
+		GoogleUser.findOne({
+			google_id: 'google_id'
+		}).then(user => {
+			// user is already registered in local database
+			if (user) {
+				return done(null, user);
+			} else { // register user in database if they are not already there
+				var attrs = {
+					google_id: google_id,
+					first_name: first_name,
+					last_name: last_name,
+					email: email
+				}
+
+				GoogleUser.create(attrs).then(newUser => {
+					return done(null. newUser);
+				})
+			}
+		});
+	}, function(err, user) {
+		done(err, user);
+	}
+));
 
 passport.use(new GoogleTokenStrategy({
 		clientID: GoogleConfig.clientId,
