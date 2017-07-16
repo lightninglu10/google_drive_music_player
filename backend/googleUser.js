@@ -9,17 +9,18 @@ module.exports = bookshelf.Model.extend({
                                         'first_name',
                                         'last_name',
                                         'google_id',
-                                        'access_token',
                                         'email',]);
     },
 
 }, {
     create: function(attrs) {
         // return new googleUser
-        var googleUser = new this(attrs);
+        var user = new this(attrs);
     	
-    	var newUser = googleUser.save();
+    	//var newUser = googleUser.save();
+        newUser = user.save();
 
+       // googleUser.save.bind(googleUser);
         return newUser;
     }
 });

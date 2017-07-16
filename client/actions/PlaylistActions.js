@@ -44,7 +44,39 @@ module.exports = {
         return dispatch => {
             return dispatch(songSelectSuccessful(song));
         }
-    }
+    },
 
+    // Get songs from drive
+    /*getGoogleSongs: function getGoogleSongs(token) {
+        console.log('token in action is: ' + token);
+        return dispatch => {
+            return fetch(API.GOOGLE, {
+                method: 'GET',
+                //mode: 'cors',
+                header: {
+                    //'Access-Control-Allow-Origin': '*',
+                    //'Content-Type': 'application/x-www-form-urlencoded',
+                    'Access-Control-Allow-Credentials': 'true',
+                    'Accept': 'application/json',
+                    'credentials': 'same-origin',
+                    //'Authorization': 'Bearer ' + token, 
+                    //'Host': 'content.google.apis',
+                },
+                //body: {
+                    //'pageSize': '10',
+                    //'fields': "nextPageToken, files(id, name, webContentLink)",
+                    //'q': "mimeType='audio/mpeg'",
+                //}
+            })
+            .then(Helpers.checkStatus)
+            .then(Helpers.parseJSON)
+            .then((json) => {
+                console.log('getGoogleSongs ' + json);
+            })
+            .catch((error) => {
+                console.log('songs were not uploaded');
+            });
+        }
+    },*/
 }         
 

@@ -29,7 +29,6 @@ class PlayerPage extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log()
     }
 
     // Handle log out button
@@ -55,7 +54,7 @@ class PlayerPage extends React.Component {
 
                 <AudioPlayer playlist={playlist} />
 
-                <GoogleDriveComp user={user} selectSong={playlistActions.selectSong} playlist={playlist} />
+                <GoogleDriveComp user={user} playlistActions={playlistActions} playlist={playlist} />
                 
                 {/*<Playlist playlistActions={playlistActions} playlist={playlist} />*/}
 

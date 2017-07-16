@@ -36,7 +36,7 @@ passport.use(new CustomStrategy({
 	}
 ));
 
-passport.use(new GoogleTokenStrategy({
+/*passport.use(new GoogleTokenStrategy({
 		clientID: GoogleConfig.clientId,
     	clientSecret: GoogleConfig.clientSecret,
     	callbackURL: GoogleConfig.callbackURL
@@ -67,7 +67,7 @@ passport.use(new GoogleTokenStrategy({
 	    	});
 	    });
   	}	
-));
+));*/
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);

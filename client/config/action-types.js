@@ -16,5 +16,5 @@ module.exports = {
     LOGIN_FAILURE: "Login was not successful",
 
     // Register User
-    LOGIN_USER_SUCCESSFUL: "Login successful"
+    REGISTER_USER_SUCCESSFUL: "Register successful"
 }

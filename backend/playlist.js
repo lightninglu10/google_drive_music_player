@@ -8,7 +8,6 @@ module.exports = bookshelf.Model.extend({
 
 }, {
 	getAllSongs: function() {
-		
 		return new this().fetchAll().then(songData => {
 			return songData.serialize();
     	}).catch(err => {

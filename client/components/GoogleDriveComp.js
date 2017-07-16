@@ -22,16 +22,17 @@ class GoogleDriveComp extends React.Component {
 
     // List files if user is logged in
 	componentDidMount() {
-        console.log(this.props.history);
+        // console.log(this.props.history);
 		if(window.gapi.auth2.getAuthInstance().isSignedIn.get()) {
             console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true));
 			this.listFiles();
 		}
+        // this.props.playlistActions.getGoogleSongs(this.props.user.accessToken);
 	}
 
     // List files 10 at a time
 	listFiles = () => {
-		drive.files.list({
+		gapi.client.drive.files.list({
 			pageSize: 10,
 			fields: "nextPageToken, files(id, name, webContentLink)",
 			q: "mimeType='audio/mpeg'",
@@ -46,7 +47,7 @@ class GoogleDriveComp extends React.Component {
 
     // Handle song click
     handleSongClick = (song) => {
-        this.props.selectSong({
+        this.props.playlistActions.selectSong({
             name: song.name,
             url: song.webContentLink,
         });

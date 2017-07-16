@@ -7,14 +7,15 @@ const PRODUCTION_SITE = process.env.APP_ENV === 'production' ? '' : '';
 const LOCALHOST = 'localhost:3000';
 
 const BASE_URL = process.env.NODE_ENV === 'production' ? ('https://' + PRODUCTION_SITE + '/api/') : ('http://' + LOCALHOST + '/api/');
+const GOOGLE_URL = 'https://www.googleapis.com/drive/v3/'
 
 module.exports = {
     PRODUCTION_SITE: PRODUCTION_SITE,
     // URLs
     PLAYLIST: BASE_URL + 'playlist/',
     GOOGLE: BASE_URL + 'login/google/token/',
-    LOGIN: BASE_URL + 'login/',
-
+    REGISTER: BASE_URL + 'register/',
+    FILES: GOOGLE_URL + 'files/',
     GET_CONFIG: {
         method: 'GET',
         credentials: 'include',
@@ -42,4 +43,19 @@ module.exports = {
             }
         })
     },
+    /*GET_FILES_CONFIG: function GET_FILES_CONFIG(data) {
+        return ({
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + data, 
+                'Host': 'content.google.apis',
+            },
+            body: {
+                'pageSize': '10',
+                'fields': "nextPageToken, files(id, name, webContentLink)",
+                'q': "mimeType='audio/mpeg'",
+            }
+        })
+    }*/
 }

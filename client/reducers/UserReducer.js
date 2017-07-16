@@ -17,6 +17,7 @@ module.exports = function userReducer(state = initialState, action) {
         case types.GOOGLE_LOGIN_REQUESTING:
         case types.GOOGLE_LOGIN_SUCCESSFUL:
         case types.LOGIN_FAILURE:
+        case types.REGISTER_USER_SUCCESSFUL:
         return {
         	...state,
         	...action,

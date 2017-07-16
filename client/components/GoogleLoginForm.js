@@ -8,6 +8,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 
 import Script from 'react-load-script';
+import GoogleLogin from 'react-google-login';
 
 // Import google app information
 var GoogleConfig = require('../../backend/google');
@@ -19,7 +20,7 @@ class GoogleLoginForm extends React.Component {
 	}
 
     componentDidMount = () => {
-        //this.start();
+        // this.start();
     }
 
     // Load Google api Javascript libraries 
@@ -50,22 +51,19 @@ class GoogleLoginForm extends React.Component {
 
     // Handle new google user 
     responseGoogle = (response) => {
+
+        console.log('repeating from googleloginform');
         console.log(response);
 
         // Submit user into local database
-        this.props.loginFunction.googleLogin({
+        this.props.loginFunction.registerUser({
             google_id: response.getId(),
             first_name: response.getGivenName(),
             last_name: response.getFamilyName(),
             email: response.getEmail()
         })
-        .then((data) => {
-            if(data.isLoggedIn) {
-                // Push to main playlist page
-                browserHistory.push('/Player');
-            } else {
-                console.log('data is not logging !!!!');
-            }
+        .then(() => {
+            browserHistory.push('/Player');
         });
     }
     
@@ -82,13 +80,25 @@ class GoogleLoginForm extends React.Component {
     	if (isSignedIn) {
             console.log('updateUserStatus true ' + this.props.loggingOut);
 
-            browserHistory.push('/Player');
-            // this.responseGoogle(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile());
+            // browserHistory.push('/Player');
+            this.responseGoogle(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile());
             
         } else {
             console.log('updateUserStatus false');
         } 
-    }
+    } 
+
+    /*responseGoogle = (response) => {
+        console.log(response);
+        this.props.loginFunction.googleLogin(response)
+        .then((data) => {
+            if(data.isLoggedIn) {
+                browserHistory.push('/Player');
+            } else {
+                console.log('data is not logging !!!!');
+            }
+        });
+    }*/
 
 	render() {
 		return(
@@ -99,6 +109,14 @@ class GoogleLoginForm extends React.Component {
                     onLoad={this.start}
                     onError={this.start}
                 ></Script>
+
+                {/*<GoogleLogin
+                    clientId="530735327961-7d2g6lfuij1q60f9ig0a73k6cah56mld.apps.googleusercontent.com"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    scope="https://www.googleapis.com/auth/drive.readonly"
+                    discoveryDocs={["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"]}
+                />*/}
 
 				<button onClick={this.handleLoginClick}>login</button>
 			</div>
