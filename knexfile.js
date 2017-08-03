@@ -1,6 +1,8 @@
 var env = require('./backend/env');
-var connection = { database : 'google_drive_music_player' };
-
+var connection;
+if(env == 'development') {
+    connection = { database : 'google_drive_music_player' };
+}
 
 module.exports = {
     client: 'pg',

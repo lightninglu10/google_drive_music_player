@@ -16,7 +16,6 @@ import GoogleLoginForm from '../components/GoogleLoginForm';
 // Login Actions
 import LoginActions from '../actions/LoginActions';
 
-
 class LoginPage extends React.Component {
 
 	constructor(props) {
@@ -24,12 +23,11 @@ class LoginPage extends React.Component {
 	}
 
 	render() {
-
-        var {loginActions} = this.props;
+        var {loginActions, user} = this.props;
 
         return (
             <div>
-                <GoogleLoginForm loginFunction={loginActions} />
+                <GoogleLoginForm loginActions={loginActions} user={user} />   
             </div>        
         );
     }

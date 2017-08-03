@@ -12,7 +12,6 @@ const GOOGLE_APIKEY = env === 'development' ? 'AIzaSyDGB0jHjLLp-mWXrXEX9AaaviklF
 module.exports = {
 	clientId : GOOGLE_CLIENT_ID,
 	clientSecret : GOOGLE_SECRET, 
-	callbackURL: 'http://localhost:3000/login/google/callback',
 	apiKey: 'AIzaSyDGB0jHjLLp-mWXrXEX9AaaviklFDbQyRk',
 	scope: 'https://www.googleapis.com/auth/drive.metadata.readonly',
 	discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest']

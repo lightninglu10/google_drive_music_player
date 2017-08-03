@@ -7,4 +7,5 @@ module.exports = combineReducers({
     // 
     user: require('./UserReducer'),
     playlist: require('./PlaylistReducer'),
+    song: require('./SongReducer'),
 });

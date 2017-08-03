@@ -7,8 +7,9 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 
-import Script from 'react-load-script';
-import GoogleLogin from 'react-google-login';
+// Styling
+import { StyleSheet, css } from 'aphrodite';
+import { Button, Well } from 'react-bootstrap';
 
 // Import google app information
 var GoogleConfig = require('../../backend/google');
@@ -20,7 +21,7 @@ class GoogleLoginForm extends React.Component {
 	}
 
     componentDidMount = () => {
-        // this.start();
+        this.start();
     }
 
     // Load Google api Javascript libraries 
@@ -30,37 +31,42 @@ class GoogleLoginForm extends React.Component {
 
     // Once login button is clicked, log in google user and connect to google api
     handleLoginClick = () => {
+        this.props.loginActions.loggingInUser();
         gapi.auth2.getAuthInstance().signIn();
     }
 
     // Callback function for gapi load
     initClient = () => {
         // Initialize Javascript client
-        window.gapi.client.init({
+        gapi.client.init({
             apiKey: GoogleConfig.apiKey,
             clientId: GoogleConfig.clientId,
             scope: GoogleConfig.scope,
             discoveryDocs: GoogleConfig.discoveryDocs
         }).then(() => {
+            var auth2 = gapi.auth2.getAuthInstance(); 
+
             // Listen for changes in current user's sign-in state
-            gapi.auth2.getAuthInstance().isSignedIn.listen(this.updateSigninStatus);
+            auth2.isSignedIn.listen(this.updateSigninStatus);
             // Set current user for newly-initalized GoogleAuth instance, and also listen for changes in the current user
-            gapi.auth2.getAuthInstance().currentUser.listen(this.updateUserStatus);
+            auth2.currentUser.listen(this.updateUserStatus);
+
+            // If user is already signed in due to not logging out properly before
+            if (auth2.isSignedIn.get()) {
+                this.props.loginActions.loggingInUser();
+                this.responseGoogle(auth2.currentUser.get().getBasicProfile());
+            }
         })
     }
 
     // Handle new google user 
     responseGoogle = (response) => {
-
-        console.log('repeating from googleloginform');
-        console.log(response);
-
         // Submit user into local database
-        this.props.loginFunction.registerUser({
+        this.props.loginActions.registerUser({
             google_id: response.getId(),
             first_name: response.getGivenName(),
             last_name: response.getFamilyName(),
-            email: response.getEmail()
+            email: response.getEmail(),
         })
         .then(() => {
             browserHistory.push('/Player');
@@ -68,60 +74,51 @@ class GoogleLoginForm extends React.Component {
     }
     
     updateSigninStatus = (isSignedIn) => {
+        // If user is logged in
         if (isSignedIn) {
-            console.log('update status signed in');
+            console.log('Logged in');
+            if (!this.props.user.isLoggingOut) {
+                this.responseGoogle(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile());
+            }
         } else {
-            console.log('update status not signed in');
-            browserHistory.push('/Login');
+            console.log('Not logged in');
         } 
     }
 
-    updateUserStatus = (isSignedIn) => {
-    	if (isSignedIn) {
-            console.log('updateUserStatus true ' + this.props.loggingOut);
-
-            // browserHistory.push('/Player');
-            this.responseGoogle(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile());
-            
-        } else {
-            console.log('updateUserStatus false');
-        } 
+    updateUserStatus = () => {
+        console.log('User status updated');
     } 
-
-    /*responseGoogle = (response) => {
-        console.log(response);
-        this.props.loginFunction.googleLogin(response)
-        .then((data) => {
-            if(data.isLoggedIn) {
-                browserHistory.push('/Player');
-            } else {
-                console.log('data is not logging !!!!');
-            }
-        });
-    }*/
 
 	render() {
 		return(
-			<div>
-
-                <Script
-                    url='https://apis.google.com/js/api.js'
-                    onLoad={this.start}
-                    onError={this.start}
-                ></Script>
-
-                {/*<GoogleLogin
-                    clientId="530735327961-7d2g6lfuij1q60f9ig0a73k6cah56mld.apps.googleusercontent.com"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                    scope="https://www.googleapis.com/auth/drive.readonly"
-                    discoveryDocs={["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"]}
-                />*/}
-
-				<button onClick={this.handleLoginClick}>login</button>
+			<div className={css(styles.page)}>
+                <Well className={css(styles.container)}>
+                    <div className={css(styles.loginButton)}>
+                        <Button bsStyle="danger" bsSize="large" block onClick={this.handleLoginClick}>Login with Google</Button>
+                    </div>
+                </Well>
 			</div>
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+    page: {
+        display: 'table',
+        position: 'absolute',
+        height: '100%',
+        width: '100%',
+    },
+    container: {
+        display: 'table-cell',
+        margin: 'auto',
+        verticalAlign: 'middle',
+        width: '50%',
+    },
+    loginButton: {
+        maxWidth: 400,
+        margin: '0 auto 10px',
+    },
+})
 
 export default GoogleLoginForm;
