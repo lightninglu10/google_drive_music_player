@@ -6,7 +6,9 @@
   "scripts": {
     "test": "mocha",
     "start": "node server.js",
-    "build": "webpack --config ./webpack.production.config.js --bail"
+    "build": "webpack --config ./webpack.production.config.js --bail",
+    "build:prod": "docker build -t lightninglu10/kevinha .",
+    "start:prod": "docker run --rm -d -p 8080:5000 --name running-lunyr lightninglu10/kevinha"
   },
   "repository": {
     "type": "git",
