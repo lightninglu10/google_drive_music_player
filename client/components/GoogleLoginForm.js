@@ -32,7 +32,7 @@ class GoogleLoginForm extends React.Component {
     // Once login button is clicked, log in google user and connect to google api
     handleLoginClick = () => {
         this.props.loginActions.loggingInUser();
-        gapi.auth2.getAuthInstance().signIn();
+        gapi.auth2.getAuthInstance().signIn({prompt: 'select_account'});
     }
 
     // Callback function for gapi load
