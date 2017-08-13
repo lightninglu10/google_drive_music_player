@@ -24,6 +24,7 @@ class NavBar extends React.Component {
 	 // Handle log out button
     handleLogOutClick = (event) => {
         this.props.loginActions.loggingOutUser();
+
         gapi.auth2.getAuthInstance().signOut().then(() => {
             browserHistory.push('/Login');
         });

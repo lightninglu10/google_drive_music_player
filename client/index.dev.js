@@ -18,8 +18,8 @@ ReactDOM.render(
 );
 
 if (module.hot) {
-    module.hot.accept('./containers/root', () => {
-        const NextRoot = require('./containers/root').default;
+    module.hot.accept('./containers/Root', () => {
+        const NextRoot = require('./containers/Root').default;
         ReactDOM.render(
             <Provider store={store}>
                 <NextRoot className="startofapp" history={history} />
