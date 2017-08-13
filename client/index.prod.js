@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from './config/configure-store-dev';
-import Root from './containers/root';
+import Root from './containers/Root';
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
@@ -16,3 +16,4 @@ ReactDOM.render(
     </Provider>
     , document.getElementById('app')
 );
+ 
