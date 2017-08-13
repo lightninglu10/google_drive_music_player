@@ -1,6 +1,12 @@
 var env = require('./backend/env');
 var connection;
-if(env == 'development') {
+if (process.env.RDS_HOSTNAME) {
+    connection = { host     : process.env.RDS_HOSTNAME,
+                   database : 'ebdb',
+                   user     : process.env.RDS_USERNAME,
+                   password : process.env.RDS_PASSWORD,
+                   port     : process.env.RDS_PORT };
+} else if (env == 'development') {
     connection = { database : 'google_drive_music_player' };
 }
 
