@@ -34,7 +34,7 @@ module.exports = {
         loader: "babel-loader",
         query: {
           presets: ['react', 'latest', 'stage-2'],
-          "plugins": ["transform-decorators-legacy", "react-hot-loader/babel"]
+          "plugins": ["transform-decorators-legacy"]
         }
       },
       {
