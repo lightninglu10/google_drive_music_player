@@ -45,7 +45,7 @@ class NavBar extends React.Component {
         var title = '' + user.first_name; // Circumvent NavDropdown title error when user is undefined
 
 		return(
-			<Navbar inverse fluid>
+			<Navbar inverse fluid fixedTop>
                 <Navbar.Header>
                     <Navbar.Brand>
                         <a>Google Drive Music Player</a>

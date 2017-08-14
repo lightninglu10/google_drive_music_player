@@ -11,6 +11,8 @@ var _ = require('lodash');
 // React wrapper for HTML 5 audio tag
 import ReactAudioPlayer from 'react-audio-player';
 
+// Aphrodite
+import { StyleSheet, css } from 'aphrodite';
 // Bootstrap
 import { Button } from 'react-bootstrap';
 
@@ -107,22 +109,46 @@ class AudioPlayer extends React.Component {
         var next = '>';
 
         return (
-            <div>
+            <div className={css(styles.player)}>
+                <Button className={css(styles.button)} disabled onClick={this.handlePrevSong}>{prev}</Button>
+                <Button className={css(styles.button)} onClick={this.handleNextSong}>{next}</Button>
+
+                <div className={css(styles.controlsContainer)}>
+                	<ReactAudioPlayer
+                        className={css(styles.controls)}
+                    	src={song.currentSongUrl} 
+                    	controls
+                    	autoPlay 
+                    	onEnded={this.handleNextSong} /> 
+                </div>
+
                 <h5>Currently Playing: {song.currentSong}</h5> 
-                <br />
 
-            	<ReactAudioPlayer
-                	src={song.currentSongUrl} 
-                	controls
-                	autoPlay 
-                	onEnded={this.handleNextSong} /> 
-                <br />
-
-                <Button disabled onClick={this.handlePrevSong}>{prev}</Button>
-                <Button onClick={this.handleNextSong}>{next}</Button>
             </div>
         );
     } 
 }
+
+const styles = StyleSheet.create({
+    player: {
+        backgroundColor: 'white',
+        position: 'fixed',
+        top: '50px',
+        width: '100%',
+        zIndex: '9999'
+    },
+    button: {
+        float: 'left',
+        height: '40px',
+        width: '50px',
+        marginTop: '5px'
+    },
+    controlsContainer: {
+        marginLeft: '100px'
+    },
+    controls: {
+        width: '100%'
+    }
+})
 
 export default AudioPlayer;

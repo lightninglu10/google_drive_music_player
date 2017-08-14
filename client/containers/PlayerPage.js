@@ -212,8 +212,8 @@ class PlayerPage extends React.Component {
     }
 }
 
-// REDUX
 
+// REDUX
 function mapStateToProps(state) {
     return { 
         playlist: state.playlist,

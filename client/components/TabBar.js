@@ -6,6 +6,8 @@
 
  import React from 'react';
 
+// Aphrodite
+import { StyleSheet, css } from 'aphrodite';
  // Bootstrap
 import { Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 
@@ -30,7 +32,7 @@ import { Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
  		var { playlists, openDropdownModal, handleDropdownPlaylistClick } = this.props; 
 
 		return(
-			<Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleTabSelect}>
+			<Nav className={css(styles.padding)} bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleTabSelect}>
                 <NavItem eventKey="1">Local</NavItem>
                 <NavItem eventKey="2">Google Drive</NavItem>
                 <NavItem eventKey="3">Queue</NavItem>
@@ -50,5 +52,12 @@ import { Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+    padding: {
+        paddingTop: '120px',
+        position: 'fixed',
+    }
+})
 
  export default TabBar;

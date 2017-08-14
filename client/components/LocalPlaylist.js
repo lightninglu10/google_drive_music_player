@@ -6,6 +6,8 @@
 
 import React from 'react';
 
+// Aphrodite
+import { StyleSheet, css } from 'aphrodite';
 // Bootstrap
 import { DropdownButton, MenuItem, Table, thead, tr, th, tbody } from 'react-bootstrap';
 
@@ -77,9 +79,9 @@ class LocalPlaylist extends React.Component {
         var songList = playlist.songs;
 
         return (
-            <div>
-                <h4>Local Playlist:</h4>
-                <Table striped bordered hover>
+            <div className={css(styles.tab)}>
+                <h4 className={css(styles.name)}>Local Playlist:</h4>
+                <Table striped bordered hover responsive className={css(styles.table)}>
                     <thead>
                         <tr>
                             <th></th>
@@ -111,5 +113,19 @@ class LocalPlaylist extends React.Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    tab: {
+        paddingTop: '160px'
+    },
+    name: {
+        position: 'fixed',
+        zIndex: '9999'
+    },
+    table: {
+        marginTop: '40px',
+        zIndex: '-9999',
+    }
+})
 
 export default LocalPlaylist;
