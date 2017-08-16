@@ -131,11 +131,10 @@ class AudioPlayer extends React.Component {
 
 const styles = StyleSheet.create({
     player: {
-        backgroundColor: 'white',
-        position: 'fixed',
-        top: '50px',
+        //backgroundColor: 'white',
+        //position: 'fixed',
+        marginTop: '50px',
         width: '100%',
-        zIndex: '9999'
     },
     button: {
         float: 'left',

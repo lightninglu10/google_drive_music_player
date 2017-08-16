@@ -55,8 +55,8 @@ import { Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 
 const styles = StyleSheet.create({
     padding: {
-        paddingTop: '120px',
-        position: 'fixed',
+        //paddingTop: '120px',
+        //position: 'fixed',
     }
 })
 

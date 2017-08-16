@@ -116,15 +116,15 @@ class LocalPlaylist extends React.Component {
 
 const styles = StyleSheet.create({
     tab: {
-        paddingTop: '160px'
+        //paddingTop: '160px'
     },
     name: {
-        position: 'fixed',
-        zIndex: '9999'
+        //position: 'fixed',
+        //zIndex: '9999'
     },
     table: {
-        marginTop: '40px',
-        zIndex: '-9999',
+        //marginTop: '40px',
+        //zIndex: '-9999',
     }
 })
 
