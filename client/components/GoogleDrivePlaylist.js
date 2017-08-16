@@ -48,7 +48,13 @@ class GoogleDrivePlaylist extends React.Component {
 	}
 
     // Handle song click
-    handleSongClick = (song) => {
+    handleSongClick = (googleSong) => {
+        // Song json data from Google has different name for url attribute
+        var song = {
+            id: googleSong.id,
+            name: googleSong.name,
+            url: googleSong.webContentLink
+        }
         var attr = {
                 songLocation: "google",
                 song: song,
