@@ -14,7 +14,7 @@ import ReactAudioPlayer from 'react-audio-player';
 // Aphrodite
 import { StyleSheet, css } from 'aphrodite';
 // Bootstrap
-import { Button } from 'react-bootstrap';
+import { Button, Navbar } from 'react-bootstrap';
 
 class AudioPlayer extends React.Component {
 
@@ -109,44 +109,41 @@ class AudioPlayer extends React.Component {
         var next = '>';
 
         return (
-            <div className={css(styles.player)}>
+            <Navbar fluid fixedBottom>
+                <Navbar.Text className={css(styles.song)}>Currently Playing: {song.currentSong}</Navbar.Text><br /><br />
+
                 <Button className={css(styles.button)} disabled onClick={this.handlePrevSong}>{prev}</Button>
                 <Button className={css(styles.button)} onClick={this.handleNextSong}>{next}</Button>
 
-                <div className={css(styles.controlsContainer)}>
-                	<ReactAudioPlayer
+                <div className={css(styles.player)}>
+                    <ReactAudioPlayer
                         className={css(styles.controls)}
-                    	src={song.currentSongUrl} 
-                    	controls
-                    	autoPlay 
-                    	onEnded={this.handleNextSong} /> 
+                        src={song.currentSongUrl} 
+                        controls
+                        autoPlay 
+                        onEnded={this.handleNextSong} /> 
                 </div>
-
-                <h5>Currently Playing: {song.currentSong}</h5> 
-
-            </div>
+            </Navbar>
+            
         );
     } 
 }
 
 const styles = StyleSheet.create({
     player: {
-        //backgroundColor: 'white',
-        //position: 'fixed',
-        marginTop: '50px',
-        width: '100%',
+        overflow: 'hidden',
+        display: 'inlineBlock'
     },
     button: {
-        float: 'left',
-        height: '40px',
-        width: '50px',
-        marginTop: '5px'
-    },
-    controlsContainer: {
-        marginLeft: '100px'
+        height: '30px',
+        width: '40px',
+        float: 'left'
     },
     controls: {
         width: '100%'
+    },
+    song: {
+        margin: '5px'
     }
 })
 

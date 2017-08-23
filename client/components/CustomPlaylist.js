@@ -6,6 +6,8 @@
 
 import React from 'react';
 
+// Aphrodite
+import { StyleSheet, css } from 'aphrodite';
 // Bootstrap
 import { DropdownButton, MenuItem, Table, thead, tr, th, tbody } from 'react-bootstrap';
 
@@ -76,7 +78,7 @@ class CustomPlaylist extends React.Component {
             by: orderBy,
             dir: orderDir,
         }
-        this.props.playlistActions.orderPlaylist(attr);
+        this.props.playlistActions.orderCustomPlaylist(attr);
 
         // Invert state bool variable
         this.setState({dirBool: !bool});
@@ -87,7 +89,7 @@ class CustomPlaylist extends React.Component {
         var songList = playlist.playlistSongs;
 
         return (
-            <div>
+            <div className={css(styles.tab)}>
                 <h4>{this.state.customPlaylist.name} Playlist:</h4>
                 <Table striped bordered hover>
                     <thead>
@@ -119,5 +121,11 @@ class CustomPlaylist extends React.Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    tab: {
+        marginBottom: '170px'
+    }
+})
 
 export default CustomPlaylist;

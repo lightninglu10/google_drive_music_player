@@ -6,6 +6,8 @@
 
 import React from 'react';
 
+// Aphrodite
+import { StyleSheet, css } from 'aphrodite';
 // Bootstrap
 import { DropdownButton, MenuItem, Table, thead, tr, th, tbody, FormGroup, FormControl, Button, Form } from 'react-bootstrap';
 
@@ -116,7 +118,7 @@ class GoogleDrivePlaylist extends React.Component {
 
 	render() {
 		return(
-			<div>
+			<div className={css(styles.tab)}>
                 <h4>Google Drive Playlist:</h4>
 
                 <Form inline>
@@ -157,5 +159,11 @@ class GoogleDrivePlaylist extends React.Component {
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+    tab: {
+        marginBottom: '100px'
+    }
+})
 
 export default GoogleDrivePlaylist;

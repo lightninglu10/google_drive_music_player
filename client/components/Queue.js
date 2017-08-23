@@ -6,7 +6,9 @@
 
 import React from 'react';
 
-// Styling 
+// Aphrodite
+import { StyleSheet, css } from 'aphrodite';
+// Bootstrap 
 import { DropdownButton, MenuItem, Table, thead, tr, th, tbody } from 'react-bootstrap';
 
 class Queue extends React.Component {
@@ -36,7 +38,7 @@ class Queue extends React.Component {
 		var { queue, handlePlaylistButton } = this.props;
 
 		return (
-			<div> 
+			<div className={css(styles.tab)}> 
 				<h4>Queue:</h4>
 				
 				<Table striped bordered hover>
@@ -69,5 +71,11 @@ class Queue extends React.Component {
 		)
 	}
 }
+
+const styles = StyleSheet.create({
+    tab: {
+        marginBottom: '80px'
+    }
+})
 
 export default Queue;

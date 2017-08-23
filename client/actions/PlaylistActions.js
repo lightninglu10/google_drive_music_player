@@ -287,7 +287,7 @@ module.exports = {
         }
     },
     // Order custom playlist by name or time added
-    orderPlaylist: function orderCustomPlaylist(order) {
+    orderCustomPlaylist: function orderCustomPlaylist(order) {
         return dispatch => {
             return dispatch(orderCustomPlaylistSuccessful(order));
         }

@@ -33,7 +33,7 @@ import { Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 
 		return(
 			<Nav className={css(styles.padding)} bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleTabSelect}>
-                <NavItem eventKey="1">Local</NavItem>
+                <NavItem eventKey="1"title="actual local">Local</NavItem>
                 <NavItem eventKey="2">Google Drive</NavItem>
                 <NavItem eventKey="3">Queue</NavItem>
 	            <NavDropdown eventKey="4" title="Playlists" id="playlists-dropdown">
@@ -55,7 +55,7 @@ import { Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 
 const styles = StyleSheet.create({
     padding: {
-        //paddingTop: '120px',
+        marginTop: '50px',
         //position: 'fixed',
     }
 })
